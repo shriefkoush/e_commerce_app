@@ -41,7 +41,12 @@ dependencies:
   flutter_bloc: ^9.1.1
   injectable: ^2.5.1
   get_it: ^8.3.0
-
+  cached_network_image: ^3.4.1
+  auto_size_text: ^3.0.0
+  flutter_image_slideshow: ^0.1.6
+  readmore: ^3.0.0
+  flutter_native_splash: ^2.3.13
+  shared_preferences: ^2.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,15 +1,16 @@
+import 'package:e_commerce_app2/core/cached/shared_preference_utils.dart';
 import 'package:e_commerce_app2/core/di/di.dart';
 import 'package:e_commerce_app2/core/utils/app_assets.dart';
 import 'package:e_commerce_app2/core/utils/app_colors.dart';
 import 'package:e_commerce_app2/core/utils/app_styles.dart';
 import 'package:e_commerce_app2/core/utils/dialog_Utils.dart';
+import 'package:e_commerce_app2/core/utils/validators.dart';
 import 'package:e_commerce_app2/features/ui/login/cubit/cubit/login_states.dart';
 import 'package:e_commerce_app2/features/ui/login/cubit/cubit/login_view_model.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../register/register_screen.dart';
+import '../screens/home_screen/home_screen.dart';
 import '../widgets/customElevatedButton.dart';
 import '../widgets/customTextFeild.dart';
 
@@ -38,9 +39,16 @@ class _LoginScreenState extends State<LoginScreen> {
       DialogUtils.hideLoading(context);
        DialogUtils.showMessage(context: context, message: state.errors.errorMsg,
            posActionName: "Ok",title: "Error");
-    } else{
+    } else if(state is LoginSuccessState){
+      DialogUtils.hideLoading(context);
       DialogUtils.showMessage(context: context, message: "Login Successfully",
-      posActionName: "Ok",title: "Success");
+      posActionName: "Ok",title: "Success",posAction: (){
+        //Todo : save token
+        SharedPreferenceUtils.saveData(key: "token",
+            value: state.loginResponseEntity.token);
+        //Todo : go to Home screen
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+          });
     }
   },
   child: Scaffold(
@@ -91,16 +99,16 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: height*0.01),
             CustomTextField(
               controller: viewModel.passwordController,
-              keyboardType: TextInputType.phone,
-              validator: (text) {
-                if (text == null || text.trim().isEmpty) {
-                  return "please, enter your password!";
-                }
-                if (text.length < 6) {
-                  return "password should be at least 6 chars";
-                }
-                return null;
-              },
+               validator: AppValidators.validatePassword,
+              // (text) {
+              //   if (text == null || text.trim().isEmpty) {
+              //     return "please, enter your password!";
+              //   }
+              //   if (text.length < 6) {
+              //     return "password should be at least 6 chars";
+              //   }
+              //   return null;
+              // },
               suffixIcon: Icon(
                 Icons.visibility_off,
                 color: AppColors.greyColor,
@@ -118,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text("Forget Password?",style:AppStyles.regular18White  ,)),
             ),
             SizedBox(height: height*0.03,),
-            CustomElevatedButton(onButtonClick: (){
+            CustomElevatedButton(
+                onButtonClick: (){
               viewModel.login();
             }, text: "Login"),
             SizedBox(height: height*0.01),

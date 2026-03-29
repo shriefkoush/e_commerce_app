@@ -8,7 +8,6 @@ class LoginResponseDm extends LoginResponseEntity{
   LoginResponseDm({
       super.message,
       super.user,
-    super.statusMsg,
       super.token,});
 
   LoginResponseDm.fromJson(dynamic json) {
@@ -17,7 +16,7 @@ class LoginResponseDm extends LoginResponseEntity{
     user = json['user'] != null ? LoginUserDm.fromJson(json['user']) : null;
     token = json['token'];
   }
-
+  String? statusMsg;
 
 
 }

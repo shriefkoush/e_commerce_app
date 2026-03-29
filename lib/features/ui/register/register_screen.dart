@@ -1,16 +1,15 @@
 import 'package:e_commerce_app2/core/di/di.dart';
 import 'package:e_commerce_app2/core/utils/app_colors.dart';
 import 'package:e_commerce_app2/core/utils/dialog_Utils.dart';
+import 'package:e_commerce_app2/core/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_styles.dart';
-
 import '../widgets/customElevatedButton.dart';
 import '../widgets/customTextFeild.dart';
 import 'cubit/register_states.dart';
 import 'cubit/register_view_model.dart';
-
 class RegisterScreen extends StatelessWidget {
   RegisterViewModel viewModel = getIt<RegisterViewModel>();
 
@@ -62,13 +61,13 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: height*0.01),
               CustomTextField(
                   controller: viewModel.fullNameController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (text) {
-                    if (text == null || text.trim().isEmpty) {
-                      return "please , enter your full name";
-                    }
-                    return null;
-                    },
+                  validator: AppValidators.validateFullName,
+                    //   (text) {
+                    // if (text == null || text.trim().isEmpty) {
+                    //   return "please , enter your full name";
+                    // }
+                    // return null;
+                    // },
                   hintStyle: AppStyles.Mediam16Grey,
                   hintText: "enter your full name"
               ),
@@ -80,17 +79,18 @@ class RegisterScreen extends StatelessWidget {
                 keyboardType: TextInputType.phone,
                 hintText: "enter your mobile number",
                 controller: viewModel.mobileNumberController,
-                validator: (String? val) {
-                  if (val == null) {
-                    return "this field is required";
-                  } else if (int.tryParse(val.trim()) == null) {
-                    return "enter numbers only";
-                  } else if (val.trim().length != 11) {
-                    return "enter value must equal 11 digit";
-                  } else {
-                    return null;
-                  }
-                },
+                validator: AppValidators.validatePhoneNumber,
+                //     (String? val) {
+                //   if (val == null) {
+                //     return "this field is required";
+                //   } else if (int.tryParse(val.trim()) == null) {
+                //     return "enter numbers only";
+                //   } else if (val.trim().length != 11) {
+                //     return "enter value must equal 11 digit";
+                //   } else {
+                //     return null;
+                //   }
+                // },
               ),
               SizedBox(height: height*0.02,),
               Text("E-mail Address",style: AppStyles.regular18White,),
@@ -98,18 +98,19 @@ class RegisterScreen extends StatelessWidget {
               CustomTextField(
                   controller: viewModel.emailAddressController,
                   keyboardType: TextInputType.emailAddress,
-                  validator: (text) {
-                    if (text == null || text.trim().isEmpty) {
-                      return "please , enter your email";
-                    }
-                    final bool emailValid = RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                    ).hasMatch(text);
-                    if (!emailValid) {
-                      return "please, enter valid email";
-                    }
-                    return null;
-                  },
+                  validator: AppValidators.validateEmail,
+                  //     (text) {
+                  //   if (text == null || text.trim().isEmpty) {
+                  //     return "please , enter your email";
+                  //   }
+                  //   final bool emailValid = RegExp(
+                  //     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                  //   ).hasMatch(text);
+                  //   if (!emailValid) {
+                  //     return "please, enter valid email";
+                  //   }
+                  //   return null;
+                  // },
                   hintStyle: AppStyles.Mediam16Grey,
                   hintText: "enter your name"
               ),
@@ -118,16 +119,16 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: height*0.01),
               CustomTextField(
                 controller: viewModel.passwordController,
-                keyboardType: TextInputType.phone,
-                validator: (text) {
-                  if (text == null || text.trim().isEmpty) {
-                    return "please, enter your password!";
-                  }
-                  if (text.length < 6) {
-                    return "password should be at least 6 chars";
-                  }
-                  return null;
-                },
+                validator: AppValidators.validatePassword,
+                //     (text) {
+                //   if (text == null || text.trim().isEmpty) {
+                //     return "please, enter your password!";
+                //   }
+                //   if (text.length < 6) {
+                //     return "password should be at least 6 chars";
+                //   }
+                //   return null;
+                // },
                 suffixIcon: Icon(
                   Icons.visibility_off,
                   color: AppColors.greyColor,
@@ -141,8 +142,8 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: height*0.01),
               CustomTextField(
                 controller: viewModel.passwordController,
-                keyboardType: TextInputType.phone,
-                validator: (text) {
+                validator:
+                    (text) {
                   if (text == null || text.trim().isEmpty) {
                     return "please, enter your password!";
                   }

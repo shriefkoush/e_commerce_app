@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -8,17 +10,20 @@ import 'login_states.dart';
 class LoginViewModel extends Cubit<LoginStates> {
   LoginUseCase loginUseCase;
   LoginViewModel({required this.loginUseCase}) : super(LoginInitialState());
+
+  // todo: hold Data , handle Logic
+
+
   TextEditingController emailController = TextEditingController(
-    text: "sherifhassanally@gmail.com",
+    text: "shifoo242@gmail.co",
   );
   TextEditingController passwordController = TextEditingController(
-    text: "Shrief111",
+    text: "Shrief111*",
   );
   var formKey = GlobalKey<FormState>();
 
-  // todo: hold Data , handle Logic
   void login() async {
-    if (formKey.currentState!.validate() == true) {
+    if (formKey.currentState?.validate() == true) {
       emit(LoginLoadingState());
       var either = await loginUseCase.invoke(
         emailController.text,
@@ -26,9 +31,9 @@ class LoginViewModel extends Cubit<LoginStates> {
       );
       either.fold(
         (error) {
-          print("LOGIN ERROR STATE 🔴");
-          print("Type: ${error.runtimeType}");
-          print("Message: ${error.errorMsg}");
+          log("LOGIN ERROR STATE 🔴");
+          log("Type: ${error.runtimeType}");
+          log("Message: ${error.errorMsg}");
           emit(LoginErrorState(errors: error));
         },
         (response) {

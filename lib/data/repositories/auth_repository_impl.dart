@@ -35,7 +35,7 @@ class AuthRepositoryImpl implements AuthRepository {
     String email,
     String password,
   ) async {
-    var either = await authRemoteDataSource.Login(email, password);
+    var either = await authRemoteDataSource.login(email, password);
     return either.fold((error) => Left(error), (response) => Right(response));
   }
 }

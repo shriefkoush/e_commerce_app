@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app2/core/api/api_constants.dart';
-import 'package:e_commerce_app2/core/api/endPoints.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
@@ -14,7 +13,7 @@ class ApiManager {
     Map<String, dynamic>? queryParameters,
   }) {
     return dio.get(
-      ApiConstants.baseUrl + EndPoints.signUp,
+      ApiConstants.baseUrl + endPoint,
       queryParameters: queryParameters,
       options: Options(validateStatus: (status) => true, headers: headers),
     );
@@ -28,7 +27,7 @@ class ApiManager {
     Map<String, dynamic>? headers,
   }) {
     return dio.post(
-      ApiConstants.baseUrl + EndPoints.signUp,
+      ApiConstants.baseUrl + endPoint,
       data: body,
       queryParameters: queryParameters,
       options: Options(validateStatus: (status) => true, headers: headers),

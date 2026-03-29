@@ -6,11 +6,11 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class RegisterViewModel extends Cubit<RegisterStates> {
-  var fullNameController = TextEditingController(text: "Sherif Koush");
-  var mobileNumberController = TextEditingController(text: "01068342137");
-  var passwordController = TextEditingController(text: "Sherif11*");
-  var rePasswordController = TextEditingController(text: "Sherif11*");
-  var emailAddressController = TextEditingController(text: "shriefHassan@gmail.com");
+  var fullNameController = TextEditingController();
+  var mobileNumberController = TextEditingController();
+  var passwordController = TextEditingController();
+  var rePasswordController = TextEditingController();
+  var emailAddressController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   RegisterUseCase registerUseCase;
   RegisterViewModel({required this.registerUseCase})
