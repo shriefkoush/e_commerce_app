@@ -7,9 +7,9 @@ A Flutter-based E-Commerce mobile application built with Clean Architecture, BLo
 ## 📸 Screenshots
 
 <p float="left">
-  <img src="screenshots/home.jpg" width="200"/>
-  <img src="screenshots/category.jpg" width="200"/>
-  <img src="screenshots/product_details.jpg" width="200"/>
+  <img src="screenshots/home.jpg.jpg" width="200"/>
+  <img src="screenshots/category.jpg.jpg" width="200"/>
+  <img src="screenshots/product_details.jpg.jpg" width="200"/>
 </p>
 
 ---
